@@ -1,8 +1,11 @@
 package com.github.dmalch.components;
 
-import org.netbeans.jemmy.operators.JFrameOperator;
+import org.hamcrest.Matcher;
 
-public class MainWindow {
-    public MainWindow(final JFrameOperator frameOperator) {
-    }
+public interface MainWindow {
+    MainWindow typeText(final String text);
+
+    MainWindow then(final Matcher<MainWindow> matcher);
+
+    String editorText();
 }
