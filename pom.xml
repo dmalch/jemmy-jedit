@@ -16,14 +16,24 @@
                 <version>2.15</version>
                 <configuration>
                     <additionalClasspathElements>
-                        <additionalClasspathElement>src/test/resources</additionalClasspathElement>
+                        <additionalClasspathElement>src/test/resources/jedit.jar</additionalClasspathElement>
                     </additionalClasspathElements>
+                    <parallel>methods</parallel>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jedit</groupId>
+            <artifactId>jedit</artifactId>
+            <version>5.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/test/resources/jedit.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>org.netbeans</groupId>
             <artifactId>jemmy</artifactId>
