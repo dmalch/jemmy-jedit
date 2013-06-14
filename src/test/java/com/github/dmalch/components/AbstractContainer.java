@@ -1,13 +1,11 @@
 package com.github.dmalch.components;
 
 import org.gjt.sp.jedit.gui.EnhancedButton;
-import org.netbeans.jemmy.ComponentChooser;
 import org.netbeans.jemmy.operators.ComponentOperator;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.Operator;
-
-import java.awt.*;
+import org.netbeans.jemmy.util.NameComponentChooser;
 
 public class AbstractContainer {
     protected final JFrameOperator frameOperator;
@@ -17,17 +15,7 @@ public class AbstractContainer {
     }
 
     public static Operator.Finder byNameInToolbar(final String name) {
-        return new JButtonOperator.Finder(EnhancedButton.class, new ComponentChooser() {
-            @Override
-            public boolean checkComponent(final Component comp) {
-                return name.equals(comp.getName());
-            }
-
-            @Override
-            public String getDescription() {
-                return null;
-            }
-        });
+        return new JButtonOperator.Finder(EnhancedButton.class, new NameComponentChooser(name));
     }
 
     protected JButtonOperator findButton(final Operator.Finder chooser) {
