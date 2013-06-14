@@ -1,15 +1,16 @@
 package com.github.dmalch;
 
-import com.github.dmalch.components.MainWindow;
-import com.github.dmalch.components.MainWindowImpl;
+import com.github.dmalch.components.Editor;
+import com.github.dmalch.components.EditorImpl;
 import org.junit.Test;
 import org.netbeans.jemmy.ClassReference;
 import org.netbeans.jemmy.operators.JFrameOperator;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static com.github.dmalch.components.MainWindowImpl.editor;
+import static com.github.dmalch.components.EditorImpl.editor;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.isEmptyString;
 
 public class JEditTest {
 
@@ -22,8 +23,18 @@ public class JEditTest {
                 .then(editor(containsString(expectedText)));
     }
 
-    private MainWindow openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
+    @Test
+    public void testUndoType() throws Exception {
+        final String expectedText = "sample text";
+
+        openEditor()
+                .typeText(expectedText)
+                .clickUndo()
+                .then(editor(isEmptyString()));
+    }
+
+    private Editor openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication();
-        return new MainWindowImpl(new JFrameOperator());
+        return new EditorImpl(new JFrameOperator());
     }
 }
