@@ -9,5 +9,7 @@ public interface Editor {
 
     Editor clickUndo();
 
+    Editor clickRedo();
+
     String editorText();
 }

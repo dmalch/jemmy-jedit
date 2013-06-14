@@ -51,6 +51,13 @@ public class EditorImpl implements Editor {
     }
 
     @Override
+    public Editor clickRedo() {
+        final JButtonOperator redo = new JButtonOperator(frameOperator, buttonByName("redo"));
+        redo.clickMouse();
+        return this;
+    }
+
+    @Override
     public String editorText() {
         return getTextArea().getText();
     }

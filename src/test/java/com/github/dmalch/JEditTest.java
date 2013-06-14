@@ -33,6 +33,17 @@ public class JEditTest {
                 .then(editor(isEmptyString()));
     }
 
+    @Test
+    public void testRedoType() throws Exception {
+        final String expectedText = "sample text";
+
+        openEditor()
+                .typeText(expectedText)
+                .clickUndo()
+                .clickRedo()
+                .then(editor(containsString(expectedText)));
+    }
+
     private Editor openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication();
         return new EditorImpl(new JFrameOperator());
