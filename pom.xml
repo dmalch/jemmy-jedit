@@ -18,9 +18,6 @@
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/test/resources/jedit.jar</additionalClasspathElement>
                     </additionalClasspathElements>
-                    <parallel>methods</parallel>
-                    <forkCount>1</forkCount>
-                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
         </plugins>

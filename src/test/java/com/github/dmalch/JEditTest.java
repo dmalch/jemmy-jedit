@@ -45,7 +45,7 @@ public class JEditTest {
     }
 
     private Editor openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
-        new ClassReference("org.gjt.sp.jedit.jEdit").startApplication();
+        new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(new String[]{"-noserver"});
         return new EditorImpl(new JFrameOperator());
     }
 }
