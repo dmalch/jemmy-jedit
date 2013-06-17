@@ -38,6 +38,12 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     @Override
+    public Settings clickOptions() {
+        findButton(byNameInToolbar("combined-options")).clickMouse();
+        return new SettingsImpl(frameOperator);
+    }
+
+    @Override
     public String editorText() {
         return getTextArea().getText();
     }

@@ -1,22 +1,17 @@
 package com.github.dmalch;
 
-import com.github.dmalch.components.Editor;
-import com.github.dmalch.components.EditorImpl;
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
-import org.netbeans.jemmy.ClassReference;
-import org.netbeans.jemmy.operators.JFrameOperator;
-
-import java.lang.reflect.InvocationTargetException;
 
 import static com.github.dmalch.components.EditorImpl.editor;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isEmptyString;
 
-public class JEditTest {
+public class EditorTest extends AbstractJEditTest {
 
     @Test
     public void testTypeText() throws Exception {
-        final String expectedText = "sample text";
+        final String expectedText = givenText();
 
         openEditor()
                 .typeText(expectedText)
@@ -25,7 +20,7 @@ public class JEditTest {
 
     @Test
     public void testUndoType() throws Exception {
-        final String expectedText = "sample text";
+        final String expectedText = givenText();
 
         openEditor()
                 .typeText(expectedText)
@@ -35,7 +30,7 @@ public class JEditTest {
 
     @Test
     public void testRedoType() throws Exception {
-        final String expectedText = "sample text";
+        final String expectedText = givenText();
 
         openEditor()
                 .typeText(expectedText)
@@ -44,8 +39,7 @@ public class JEditTest {
                 .then(editor(containsString(expectedText)));
     }
 
-    private Editor openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
-        new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(new String[]{"-noserver"});
-        return new EditorImpl(new JFrameOperator());
+    private String givenText() {
+        return RandomStringUtils.randomAlphanumeric(10);
     }
 }

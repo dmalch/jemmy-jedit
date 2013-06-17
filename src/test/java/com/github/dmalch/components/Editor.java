@@ -1,15 +1,13 @@
 package com.github.dmalch.components;
 
-import org.hamcrest.Matcher;
-
-public interface Editor {
+public interface Editor extends Assertable<Editor> {
     Editor typeText(final String text);
-
-    Editor then(final Matcher<Editor> matcher);
 
     Editor clickUndo();
 
     Editor clickRedo();
+
+    Settings clickOptions();
 
     String editorText();
 }
