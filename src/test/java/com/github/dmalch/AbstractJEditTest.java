@@ -8,8 +8,15 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class AbstractJEditTest {
-    protected Editor openEditor() throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InterruptedException {
-        new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(new String[]{"-noserver"});
+    protected Editor openEditor() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException {
+        final String[] settings = {
+                "-noserver",
+                "-nosplash",
+                "-nosettings"
+        };
+
+        new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(settings);
+//        new ClassReference("org.netbeans.jemmy.explorer.GUIBrowser").startApplication();
         return new EditorImpl(new JFrameOperator());
     }
 }

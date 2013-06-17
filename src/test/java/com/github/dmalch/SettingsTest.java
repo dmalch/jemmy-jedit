@@ -5,9 +5,10 @@ import org.junit.Test;
 public class SettingsTest extends AbstractJEditTest {
 
     @Test
-    public void testTypeText() throws Exception {
+    public void testOpenCloseDialog() throws Exception {
 
         openEditor()
-                .clickOptions();
+                .clickOptions()
+                .clickClose();
     }
 }

@@ -39,7 +39,7 @@ public class EditorImpl extends AbstractContainer implements Editor {
 
     @Override
     public Settings clickOptions() {
-        findButton(byNameInToolbar("combined-options")).clickMouse();
+        findButton(byNameInToolbar("combined-options")).pushNoBlock();
         return new SettingsImpl(frameOperator);
     }
 
