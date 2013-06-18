@@ -17,7 +17,7 @@ public abstract class AbstractJEditTest {
 
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(settings);
         final JFrameOperator frameOperator = new JFrameOperator();
-        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 3000L);
+        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 1000L);
         return new EditorImpl(frameOperator);
     }
 }
