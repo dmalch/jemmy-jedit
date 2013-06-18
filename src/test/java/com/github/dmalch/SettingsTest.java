@@ -11,6 +11,7 @@ public class SettingsTest extends AbstractJEditTest {
     @Test
     public void testOpenCloseDialog() throws Exception {
         openEditor()
+                .closeTipsPopupIfExists()
                 .clickOptions()
                 .clickClose();
     }
@@ -18,7 +19,7 @@ public class SettingsTest extends AbstractJEditTest {
     @Test
     public void testChangeBackgroundColor() throws Exception {
         openEditor()
-                .closeTipsPopup()
+                .closeTipsPopupIfExists()
                 .clickOptions()
                 .goToTextArea()
                 .changeBackgroundColorTo(CYAN)

@@ -16,7 +16,8 @@ public abstract class AbstractJEditTest {
         };
 
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(settings);
-//        new ClassReference("org.netbeans.jemmy.explorer.GUIBrowser").startApplication();
-        return new EditorImpl(new JFrameOperator());
+        final JFrameOperator frameOperator = new JFrameOperator();
+        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 1000L);
+        return new EditorImpl(frameOperator);
     }
 }

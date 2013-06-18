@@ -14,6 +14,7 @@ public class EditorTest extends AbstractJEditTest {
         final String expectedText = givenText();
 
         openEditor()
+                .closeTipsPopupIfExists()
                 .typeText(expectedText)
                 .then(editorText(containsString(expectedText)));
     }
@@ -23,6 +24,7 @@ public class EditorTest extends AbstractJEditTest {
         final String expectedText = givenText();
 
         openEditor()
+                .closeTipsPopupIfExists()
                 .typeText(expectedText)
                 .clickUndo()
                 .then(editorText(isEmptyString()));
@@ -33,6 +35,7 @@ public class EditorTest extends AbstractJEditTest {
         final String expectedText = givenText();
 
         openEditor()
+                .closeTipsPopupIfExists()
                 .typeText(expectedText)
                 .clickUndo()
                 .clickRedo()

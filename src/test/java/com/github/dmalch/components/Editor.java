@@ -13,7 +13,7 @@ public interface Editor extends Assertable<Editor> {
 
     TipPopup tipPopup();
 
-    Editor closeTipsPopup();
+    Editor closeTipsPopupIfExists();
 
     String editorText();
 
