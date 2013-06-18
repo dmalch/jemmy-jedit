@@ -11,6 +11,10 @@ public interface Editor extends Assertable<Editor> {
 
     Settings clickOptions();
 
+    TipPopup tipPopup();
+
+    Editor closeTipsPopup();
+
     String editorText();
 
     Color editorBackgroundColor();

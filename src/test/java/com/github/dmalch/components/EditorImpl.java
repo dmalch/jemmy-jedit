@@ -46,6 +46,17 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     @Override
+    public Editor closeTipsPopup() {
+        return tipPopup()
+                .clickClose();
+    }
+
+    @Override
+    public TipPopup tipPopup() {
+        return new TipPopupImpl(frameOperator);
+    }
+
+    @Override
     public String editorText() {
         return getTextArea().getText();
     }

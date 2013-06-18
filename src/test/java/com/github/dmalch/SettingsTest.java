@@ -18,6 +18,7 @@ public class SettingsTest extends AbstractJEditTest {
     @Test
     public void testChangeBackgroundColor() throws Exception {
         openEditor()
+                .closeTipsPopup()
                 .clickOptions()
                 .goToTextArea()
                 .changeBackgroundColorTo(CYAN)
