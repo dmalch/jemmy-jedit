@@ -1,7 +1,7 @@
 package com.github.dmalch;
 
 import com.github.dmalch.components.Editor;
-import com.github.dmalch.components.EditorImpl;
+import com.github.dmalch.components.impl.EditorImpl;
 import org.netbeans.jemmy.ClassReference;
 import org.netbeans.jemmy.operators.JFrameOperator;
 
@@ -17,7 +17,7 @@ public abstract class AbstractJEditTest {
 
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(settings);
         final JFrameOperator frameOperator = new JFrameOperator();
-        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 1000L);
+        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 3000L);
         return new EditorImpl(frameOperator);
     }
 }

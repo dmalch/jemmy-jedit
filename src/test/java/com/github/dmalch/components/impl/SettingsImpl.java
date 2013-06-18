@@ -1,5 +1,7 @@
-package com.github.dmalch.components;
+package com.github.dmalch.components.impl;
 
+import com.github.dmalch.components.Editor;
+import com.github.dmalch.components.Settings;
 import org.gjt.sp.jedit.gui.ColorWellButton;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
@@ -10,6 +12,7 @@ import java.awt.*;
 
 public class SettingsImpl extends AbstractContainer implements Settings {
 
+    public static final int BACKGROUND_COLOR_CHOOSER_INDEX = 1;
     private final JDialogOperator dialog;
 
     public SettingsImpl(final JFrameOperator frameOperator) {
@@ -35,12 +38,16 @@ public class SettingsImpl extends AbstractContainer implements Settings {
     @Override
     public Editor clickOK() {
         findButton("OK").clickMouse();
-        return new EditorImpl(frameOperator);
+        return editor();
     }
 
     @Override
     public Editor clickClose() {
         findButton("Cancel").clickMouse();
+        return editor();
+    }
+
+    private EditorImpl editor() {
         return new EditorImpl(frameOperator);
     }
 
@@ -49,10 +56,14 @@ public class SettingsImpl extends AbstractContainer implements Settings {
     }
 
     private JButtonOperator chooseBackgroundColorButton() {
-        return new JButtonOperator(dialog, new JButtonOperator.Finder(ColorWellButton.class), 1);
+        return findButtonIn(dialog, colorChooser(), BACKGROUND_COLOR_CHOOSER_INDEX);
     }
 
     protected JButtonOperator findButton(final String text) {
-        return new JButtonOperator(dialog, text);
+        return findButtonIn(dialog, text, 0);
+    }
+
+    private static JButtonOperator.Finder colorChooser() {
+        return new JButtonOperator.Finder(ColorWellButton.class);
     }
 }

@@ -2,7 +2,7 @@ package com.github.dmalch;
 
 import org.junit.Test;
 
-import static com.github.dmalch.components.EditorImpl.editorColor;
+import static com.github.dmalch.matchers.Matchers.editorColor;
 import static java.awt.Color.CYAN;
 import static org.hamcrest.Matchers.is;
 

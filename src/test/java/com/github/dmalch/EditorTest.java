@@ -3,7 +3,7 @@ package com.github.dmalch;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 
-import static com.github.dmalch.components.EditorImpl.editorText;
+import static com.github.dmalch.matchers.Matchers.editorText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isEmptyString;
 

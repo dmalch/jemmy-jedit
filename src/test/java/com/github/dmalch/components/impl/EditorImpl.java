@@ -1,8 +1,10 @@
-package com.github.dmalch.components;
+package com.github.dmalch.components.impl;
 
+import com.github.dmalch.components.Editor;
+import com.github.dmalch.components.Settings;
+import com.github.dmalch.components.TipPopup;
 import org.gjt.sp.jedit.gui.EnhancedButton;
 import org.gjt.sp.jedit.textarea.JEditTextArea;
-import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.netbeans.jemmy.ComponentChooser;
 import org.netbeans.jemmy.operators.ComponentOperator;
@@ -54,10 +56,8 @@ public class EditorImpl extends AbstractContainer implements Editor {
     public Editor closeTipsPopupIfExists() {
         final TipPopup tipPopup = tipPopup();
         if (tipPopup.isVisible()) {
-            return tipPopup
-                    .clickClose();
+            return tipPopup.clickClose();
         }
-
         return this;
     }
 
@@ -90,33 +90,15 @@ public class EditorImpl extends AbstractContainer implements Editor {
         return new Operator.Finder(JEditTextArea.class);
     }
 
-    public static ComponentChooser byNameInToolbar(final String name) {
-        return new JButtonOperator.Finder(EnhancedButton.class, new NameComponentChooser(name));
+    private JButtonOperator findButton(final ComponentChooser chooser) {
+        return findButtonIn(frameOperator, chooser, 0);
     }
 
-    protected JButtonOperator findButton(final ComponentChooser chooser) {
-        return new JButtonOperator(frameOperator, chooser);
-    }
-
-    protected ComponentOperator findComponent(final ComponentChooser chooser) {
+    private ComponentOperator findComponent(final ComponentChooser chooser) {
         return new ComponentOperator(frameOperator, chooser);
     }
 
-    public static Matcher<Editor> editorText(final Matcher<String> matcher) {
-        return new FeatureMatcher<Editor, String>(matcher, "editor text", "editor text") {
-            @Override
-            protected String featureValueOf(final Editor actual) {
-                return actual.editorText();
-            }
-        };
-    }
-
-    public static Matcher<Editor> editorColor(final Matcher<Color> matcher) {
-        return new FeatureMatcher<Editor, Color>(matcher, "editor background", "editor background") {
-            @Override
-            protected Color featureValueOf(final Editor actual) {
-                return actual.editorBackgroundColor();
-            }
-        };
+    public static ComponentChooser byNameInToolbar(final String name) {
+        return new JButtonOperator.Finder(EnhancedButton.class, new NameComponentChooser(name));
     }
 }
