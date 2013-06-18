@@ -1,15 +1,12 @@
 package com.github.dmalch.components;
 
 import org.gjt.sp.jedit.gui.ColorWellButton;
-import org.hamcrest.Matcher;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JTreeOperator;
 
 import java.awt.*;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SettingsImpl extends AbstractContainer implements Settings {
 
@@ -22,9 +19,9 @@ public class SettingsImpl extends AbstractContainer implements Settings {
 
     @Override
     public Settings goToTextArea() {
-        final JTreeOperator tree = new JTreeOperator(dialog);
-        final int textarea = tree.findRow("TextArea");
-        tree.selectRow(textarea);
+        final JTreeOperator tree = findTree();
+        final int textArea = tree.findRow("TextArea");
+        tree.selectRow(textArea);
         return this;
     }
 
@@ -47,14 +44,12 @@ public class SettingsImpl extends AbstractContainer implements Settings {
         return new EditorImpl(frameOperator);
     }
 
-    private JButtonOperator chooseBackgroundColorButton() {
-        return new JButtonOperator(dialog, new JButtonOperator.Finder(ColorWellButton.class), 1);
+    private JTreeOperator findTree() {
+        return new JTreeOperator(dialog);
     }
 
-    @Override
-    public Settings then(final Matcher<Settings> matcher) {
-        assertThat(this, matcher);
-        return this;
+    private JButtonOperator chooseBackgroundColorButton() {
+        return new JButtonOperator(dialog, new JButtonOperator.Finder(ColorWellButton.class), 1);
     }
 
     protected JButtonOperator findButton(final String text) {

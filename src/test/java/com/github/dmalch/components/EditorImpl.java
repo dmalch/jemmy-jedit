@@ -1,10 +1,15 @@
 package com.github.dmalch.components;
 
+import org.gjt.sp.jedit.gui.EnhancedButton;
 import org.gjt.sp.jedit.textarea.JEditTextArea;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+import org.netbeans.jemmy.ComponentChooser;
+import org.netbeans.jemmy.operators.ComponentOperator;
+import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.Operator;
+import org.netbeans.jemmy.util.NameComponentChooser;
 
 import java.awt.*;
 
@@ -83,6 +88,18 @@ public class EditorImpl extends AbstractContainer implements Editor {
 
     private Operator.Finder jEditTextArea() {
         return new Operator.Finder(JEditTextArea.class);
+    }
+
+    public static ComponentChooser byNameInToolbar(final String name) {
+        return new JButtonOperator.Finder(EnhancedButton.class, new NameComponentChooser(name));
+    }
+
+    protected JButtonOperator findButton(final ComponentChooser chooser) {
+        return new JButtonOperator(frameOperator, chooser);
+    }
+
+    protected ComponentOperator findComponent(final ComponentChooser chooser) {
+        return new ComponentOperator(frameOperator, chooser);
     }
 
     public static Matcher<Editor> editorText(final Matcher<String> matcher) {
