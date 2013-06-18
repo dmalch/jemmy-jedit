@@ -3,7 +3,7 @@ package com.github.dmalch;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 
-import static com.github.dmalch.components.EditorImpl.editor;
+import static com.github.dmalch.components.EditorImpl.editorText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isEmptyString;
 
@@ -15,7 +15,7 @@ public class EditorTest extends AbstractJEditTest {
 
         openEditor()
                 .typeText(expectedText)
-                .then(editor(containsString(expectedText)));
+                .then(editorText(containsString(expectedText)));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class EditorTest extends AbstractJEditTest {
         openEditor()
                 .typeText(expectedText)
                 .clickUndo()
-                .then(editor(isEmptyString()));
+                .then(editorText(isEmptyString()));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class EditorTest extends AbstractJEditTest {
                 .typeText(expectedText)
                 .clickUndo()
                 .clickRedo()
-                .then(editor(containsString(expectedText)));
+                .then(editorText(containsString(expectedText)));
     }
 
     private String givenText() {

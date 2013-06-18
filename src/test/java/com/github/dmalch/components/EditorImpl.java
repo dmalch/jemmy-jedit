@@ -6,6 +6,8 @@ import org.hamcrest.Matcher;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.Operator;
 
+import java.awt.*;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EditorImpl extends AbstractContainer implements Editor {
@@ -49,6 +51,11 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     @Override
+    public Color editorBackgroundColor() {
+        return getTextArea().getPainter().getBackground();
+    }
+
+    @Override
     public Editor then(final Matcher<Editor> matcher) {
         assertThat(this, matcher);
         return this;
@@ -62,11 +69,20 @@ public class EditorImpl extends AbstractContainer implements Editor {
         return new Operator.Finder(JEditTextArea.class);
     }
 
-    public static Matcher<Editor> editor(final Matcher<String> matcher) {
+    public static Matcher<Editor> editorText(final Matcher<String> matcher) {
         return new FeatureMatcher<Editor, String>(matcher, "editor text", "editor text") {
             @Override
             protected String featureValueOf(final Editor actual) {
                 return actual.editorText();
+            }
+        };
+    }
+
+    public static Matcher<Editor> editorColor(final Matcher<Color> matcher) {
+        return new FeatureMatcher<Editor, Color>(matcher, "editor background", "editor background") {
+            @Override
+            protected Color featureValueOf(final Editor actual) {
+                return actual.editorBackgroundColor();
             }
         };
     }
