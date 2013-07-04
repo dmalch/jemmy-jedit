@@ -1,7 +1,7 @@
 package com.github.dmalch.components.impl;
 
 import com.github.dmalch.components.Editor;
-import com.github.dmalch.components.Settings;
+import com.github.dmalch.components.SettingsDialog;
 import com.github.dmalch.components.TipPopup;
 import org.gjt.sp.jedit.gui.EnhancedButton;
 import org.gjt.sp.jedit.textarea.JEditTextArea;
@@ -11,9 +11,9 @@ import org.netbeans.jemmy.operators.ComponentOperator;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.Operator;
-import org.netbeans.jemmy.util.NameComponentChooser;
 
 import java.awt.*;
+import java.nio.file.Path;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -47,7 +47,7 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     @Override
-    public Settings clickOptions() {
+    public SettingsDialog clickOptions() {
         findButton(byNameInToolbar("combined-options")).pushNoBlock();
         return new SettingsImpl(frameOperator);
     }
@@ -68,12 +68,28 @@ public class EditorImpl extends AbstractContainer implements Editor {
 
     @Override
     public String editorText() {
-        return getTextArea().getText();
+        try {
+            return getTextArea().getText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     @Override
     public Color editorBackgroundColor() {
         return getTextArea().getPainter().getBackground();
+    }
+
+    @Override
+    public Editor openFile(final Path textFile) {
+        clickOpenFile().openFile(textFile);
+        return this;
+    }
+
+    @Override
+    public OpenFileDialog clickOpenFile() {
+        findButton(byNameInToolbar("open-file")).pushNoBlock();
+        return new OpenFileDialogImpl(frameOperator);
     }
 
     @Override
@@ -99,6 +115,6 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     public static ComponentChooser byNameInToolbar(final String name) {
-        return new JButtonOperator.Finder(EnhancedButton.class, new NameComponentChooser(name));
+        return new JButtonOperator.Finder(EnhancedButton.class, byName(name));
     }
 }

@@ -1,6 +1,9 @@
 package com.github.dmalch.components;
 
+import com.github.dmalch.components.impl.OpenFileDialog;
+
 import java.awt.*;
+import java.nio.file.Path;
 
 public interface Editor extends Assertable<Editor> {
     Editor typeText(final String text);
@@ -9,7 +12,9 @@ public interface Editor extends Assertable<Editor> {
 
     Editor clickRedo();
 
-    Settings clickOptions();
+    SettingsDialog clickOptions();
+
+    OpenFileDialog clickOpenFile();
 
     TipPopup tipPopup();
 
@@ -18,4 +23,6 @@ public interface Editor extends Assertable<Editor> {
     String editorText();
 
     Color editorBackgroundColor();
+
+    Editor openFile(Path textFile);
 }

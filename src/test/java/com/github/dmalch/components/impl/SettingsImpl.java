@@ -1,7 +1,7 @@
 package com.github.dmalch.components.impl;
 
 import com.github.dmalch.components.Editor;
-import com.github.dmalch.components.Settings;
+import com.github.dmalch.components.SettingsDialog;
 import org.gjt.sp.jedit.gui.ColorWellButton;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
@@ -10,7 +10,7 @@ import org.netbeans.jemmy.operators.JTreeOperator;
 
 import java.awt.*;
 
-public class SettingsImpl extends AbstractContainer implements Settings {
+public class SettingsImpl extends AbstractContainer implements SettingsDialog {
 
     public static final int BACKGROUND_COLOR_CHOOSER_INDEX = 1;
     private final JDialogOperator dialog;
@@ -21,7 +21,7 @@ public class SettingsImpl extends AbstractContainer implements Settings {
     }
 
     @Override
-    public Settings goToTextArea() {
+    public SettingsDialog goToTextArea() {
         final JTreeOperator tree = findTree();
         final int textArea = tree.findRow("TextArea");
         tree.selectRow(textArea);
@@ -29,7 +29,7 @@ public class SettingsImpl extends AbstractContainer implements Settings {
     }
 
     @Override
-    public Settings changeBackgroundColorTo(final Color color) {
+    public SettingsDialog changeBackgroundColorTo(final Color color) {
         final ColorWellButton source = (ColorWellButton) chooseBackgroundColorButton().getSource();
         source.setSelectedColor(color);
         return this;

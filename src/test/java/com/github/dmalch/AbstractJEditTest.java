@@ -8,6 +8,9 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class AbstractJEditTest {
+
+    public static final long WAIT_TIMEOUT = 1000L;
+
     protected Editor openEditor() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException {
         final String[] settings = {
                 "-noserver",
@@ -17,7 +20,7 @@ public abstract class AbstractJEditTest {
 
         new ClassReference("org.gjt.sp.jedit.jEdit").startApplication(settings);
         final JFrameOperator frameOperator = new JFrameOperator();
-        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", 1000L);
+        frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", WAIT_TIMEOUT);
         return new EditorImpl(frameOperator);
     }
 }
