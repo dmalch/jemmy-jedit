@@ -1,4 +1,4 @@
-package com.github.dmalch.components.impl;
+package com.github.dmalch.components;
 
 import java.nio.file.Path;
 

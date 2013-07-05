@@ -1,5 +1,6 @@
 package com.github.dmalch.components.impl;
 
+import com.github.dmalch.components.OpenFileDialog;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;

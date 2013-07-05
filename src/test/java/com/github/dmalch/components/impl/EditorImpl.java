@@ -1,6 +1,7 @@
 package com.github.dmalch.components.impl;
 
 import com.github.dmalch.components.Editor;
+import com.github.dmalch.components.OpenFileDialog;
 import com.github.dmalch.components.SettingsDialog;
 import com.github.dmalch.components.TipPopup;
 import org.gjt.sp.jedit.gui.EnhancedButton;
@@ -87,9 +88,19 @@ public class EditorImpl extends AbstractContainer implements Editor {
     }
 
     @Override
+    public Editor saveFile() {
+        clickSaveFile();
+        return this;
+    }
+
+    @Override
     public OpenFileDialog clickOpenFile() {
         findButton(byNameInToolbar("open-file")).pushNoBlock();
         return new OpenFileDialogImpl(frameOperator);
+    }
+
+    private void clickSaveFile() {
+        findButton(byNameInToolbar("save")).pushNoBlock();
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.github.dmalch.components;
 
-import com.github.dmalch.components.impl.OpenFileDialog;
-
 import java.awt.*;
 import java.nio.file.Path;
 
@@ -25,4 +23,6 @@ public interface Editor extends Assertable<Editor> {
     Color editorBackgroundColor();
 
     Editor openFile(Path textFile);
+
+    Editor saveFile();
 }
