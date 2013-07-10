@@ -7,6 +7,8 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static org.apache.commons.lang.RandomStringUtils.randomAlphanumeric;
+
 public abstract class AbstractJEditTest {
 
     public static final long WAIT_TIMEOUT = 1000L;
@@ -22,5 +24,9 @@ public abstract class AbstractJEditTest {
         final JFrameOperator frameOperator = new JFrameOperator();
         frameOperator.getTimeouts().setTimeout("DialogWaiter.WaitDialogTimeout", WAIT_TIMEOUT);
         return new EditorImpl(frameOperator);
+    }
+
+    protected String givenText() {
+        return randomAlphanumeric(10);
     }
 }
